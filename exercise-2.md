@@ -26,7 +26,7 @@ Similar method exists for SQL Server Management Studio if you have it installed.
 
 Next, let's add the `Weight` property to our `CatalogItem` entity.
 
-`src\Services\Catalog\Catalog.API\Model\CatalogItem.csCatalogItem.cs`:
+`src\Services\Catalog\Catalog.API\Model\CatalogItem.cs`:
 
 ```csharp
 public decimal Weight { get; set; } 
