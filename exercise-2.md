@@ -19,7 +19,7 @@ If you've already run the application, the Catalog database has existing data th
 From Visual Studio:
 
 - Navigate to Tools -> SQL Server Object Explorer
-- Connect to .\5433, sa, Pass@word
+- Connect to .\,5433, sa, Pass@word
 - Drop the database
 
 Similar method exists for SQL Server Management Studio if you have it installed.
