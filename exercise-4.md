@@ -33,7 +33,46 @@ Also add a method to expose this value:
 public decimal GetWeight() => _weight;
 ```
 
-### Step 2: Modify Order aggregate to set weight value
+### Step 2: Modify Entity Framework to track the weight
+
+EF Core does not yet understand it needs to save the weight on the order item. Modify the order item configuration to include this value:
+
+`src\Services\Ordering\Ordering.Infrastructure\EntityConfigurations\OrderItemEntityTypeConfiguration.cs`
+
+```csharp
+orderItemConfiguration
+    .Property<decimal>("_weight")
+    .UsePropertyAccessMode(PropertyAccessMode.Field)
+    .HasColumnName("Weight")
+    .IsRequired()
+    .HasDefaultValue(0m);
+```
+
+Next, we'll need to add a migration to include this new column in the database. If you haven't already, add .NET CLI EF tools from a command prompt:
+
+```
+dotnet tool install --global dotnet-ef
+```
+
+The design tools to enable migrations aren't installed yet, so add a package to the `Ordering.Infrastructure.csproj` project:
+
+```xml
+<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0" />
+```
+
+Finally, in the command prompt, navigate to the folder for the project that contains the Order migrations:
+
+`src\Services\Ordering\Ordering.API`
+
+and use the EF Core .NET CLI tools to add a new migration:
+
+```
+dotnet ef migrations add AddOrderItemWeight --context OrderingContext
+```
+
+This will add a migration and apply it to our database. If this fails because the database is not running, use Docker Desktop to start your container with an image named `mcr.microsoft.com/mssql/server:2019-latest`.
+
+### Step 3: Modify Order aggregate to set weight value
 
 Now that our `OrderItem` entity requires a weight, we'll need to include this value in our aggregate root's methods.
 
@@ -53,7 +92,7 @@ Next, pass this value through to the `OrderItem` constructor later in the method
 var orderItem = new OrderItem(productId, productName, unitPrice, discount, pictureUrl, weight, units);
 ```
 
-### Step 3: Modify commands to include weight
+### Step 4: Modify commands to include weight
 
 Orders are created through command objects, so we'll need to modify our command and handler to pass this value through to our aggregate.
 
@@ -88,7 +127,7 @@ ProductName = oi.GetOrderItemProductName(),
 Weight = oi.GetWeight()
 ```
 
-### Step 4: Pass the weight from the Basket to our command
+### Step 5: Pass the weight from the Basket to our command
 
 Now that we have our command handler ready to accept the weight, we need to pass this value from our basket. 
 
@@ -109,7 +148,7 @@ Units = item.Quantity,
 Weight = item.Weight
 ```
 
-### Step 5: Fix unit tests
+### Step 6: Fix unit tests
 
 The unit tests use a builder pattern that hasn't been fixed for the new data, so let's do that. First, the builder:
 
@@ -145,7 +184,7 @@ And finally our unit test:
 Other tests should be updated too, but we'll leave those out for now to get things compiling.
 
 
-### Step 5: Enforce weight restriction
+### Step 7: Enforce weight restriction
 
 Now that our order has a weight, we can enforce a weight restriction when updating the shipping status (since there isn't an actual shipping service).
 
