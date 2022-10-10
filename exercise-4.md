@@ -217,7 +217,7 @@ public void SetShippedStatus()
 {
     if (GetTotalWeight() > 1000)
     {
-        throw new OrderingDomainException("Too big.")
+        throw new OrderingDomainException("Too big.");
     }
 ```
 
