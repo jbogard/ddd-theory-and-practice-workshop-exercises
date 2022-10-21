@@ -49,6 +49,8 @@ Next, modify the GRPC contract for the Catalog service.
 double weight = 8;
 ```
 
+Build the solution so that the gRPC clients and contracts are regenerated with the new properties.
+
 ### Step 3: Record the Weight in the Basket
 
 Now that the Weight property is on the public APIs, we can modify the cart logic to include the `Weight` property.
