@@ -3,6 +3,8 @@
 
 The purpose of this exercise is to extend the newly added `Weight` attribute to the cart. Because of the distributed nature of this system, it's a bit trickier than it seems.
 
+When modeling subdomains after business flows, it often comes with a side effect of "duplicating" data as the information flows from subdomain to subdomain. However, just because this data has the same value does not imply it has the same meaning.
+
 ### Step 1: Modify the CatalogItem models
 
 The `CatalogItem` entity already contain the `Weight` field, but it's not exposed in the APIs used by Cart.
