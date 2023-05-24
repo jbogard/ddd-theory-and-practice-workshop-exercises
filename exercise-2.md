@@ -1,7 +1,9 @@
 
 ## Goals
 
-In this exercise, we will add a new attribute to our catalog items - weight - and display it
+In this exercise, we will add a new attribute to our catalog items - weight - and display it.
+
+This exercise modifies one of the "simple" domains, a supporting subdomain. It has a simplified architecture, but still has clean code and good test coverage.
 
 ### Prerequisite - install .NET EF Global tools
 
