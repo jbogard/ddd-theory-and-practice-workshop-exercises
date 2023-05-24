@@ -17,13 +17,15 @@ First, the model returned by the Backend-for-Frontend:
 public decimal Weight { get; set; }
 ```
 
-Next, the GRPC contract for the Catalog service.
+Next, the GRPC contract `CatalogItemResponse` for the Catalog service.
 
-`src/Services/Catalog/Catalog.API/Proto/catalog.proto`:
+`src/Services/Catalog/Catalog.API/Proto/catalog.proto`, line 33:
 
 ```proto
 double weight=15;
 ```
+
+Save and build this project to have the C# contract code-generated.
 
 ### Step 2: Modify the Basket-related models
 
