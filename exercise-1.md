@@ -8,7 +8,7 @@ Visual Studio provides the optimum debugging experience but it's not required fo
 
 Dependending on your platform, continue with the link in the "setup wiki page".
 
-## Step 2 Setup
+## Step 2: Setup
 
 Follow the instructions for:
 - Install Docker Desktop
