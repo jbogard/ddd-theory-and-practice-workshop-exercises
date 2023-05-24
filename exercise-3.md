@@ -45,9 +45,9 @@ Next, add a `Weight` property to the model returned by the Basket API:
 public decimal Weight { get; set; }
 ```
 
-Next, modify the GRPC contract for the Catalog service.
+Next, modify the GRPC contract `BasketItemResponse` for the Catalog service.
 
-`src/Services/Basket/Basket.API/Proto/basket.proto`:
+`src/Services/Basket/Basket.API/Proto/basket.proto`, line 34:
 
 ```proto
 double weight = 8;
